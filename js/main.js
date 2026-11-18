@@ -116,3 +116,93 @@ function scrollDepoimentos(distance) {
     galeria.scrollBy({left: distance, behavior: "smooth"});
   }
 }
+
+
+/* =====================================
+   FORMULÁRIO BALAZI + WHATSAPP
+   GA4 + META PIXEL
+===================================== */
+
+const formulario = document.getElementById("formOrcamento");
+
+if (formulario) {
+
+    formulario.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        if (!formulario.reportValidity()) return;
+
+        const dados = {
+            nome: document.getElementById("nome").value.trim(),
+            telefone: document.getElementById("telefone").value.trim(),
+            cidade: document.getElementById("cidade").value.trim(),
+            produto: document.getElementById("produto").value,
+            medidas: document.getElementById("medidas").value.trim(),
+            teto: document.getElementById("teto").value,
+            observacoes: document.getElementById("observacoes").value.trim()
+        };
+
+        // Captura origem dos anúncios
+        const parametros = new URLSearchParams(window.location.search);
+
+        const utms = [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_term",
+            "utm_content"
+        ];
+
+        let origem = [];
+
+        utms.forEach(function(item) {
+            const valor = parametros.get(item);
+            if (valor) {
+                origem.push(item + ": " + valor);
+            }
+        });
+
+        // Monta mensagem
+        const mensagem = `
+Olá! Gostaria de solicitar um orçamento com a Balazi Varais.
+
+*Nome:* ${dados.nome}
+*WhatsApp:* ${dados.telefone}
+*Cidade:* ${dados.cidade}
+*Produto:* ${dados.produto}
+*Medidas:* ${dados.medidas || "Não informado"}
+*Tipo de teto:* ${dados.teto || "Não informado"}
+*Observações:* ${dados.observacoes || "Nenhuma"}
+
+*Origem do contato:*
+${origem.length ? origem.join("\n") : "Acesso direto"}
+
+#landing_page_google_ads
+        `.trim();
+
+        const numero = "555183140026";
+
+        const link = "https://wa.me/" + numero +
+            "?text=" + encodeURIComponent(mensagem);
+
+        // Rastreamento GA4
+        if (typeof gtag === "function") {
+            gtag("event", "whatsapp_form_open", {
+                event_category: "lead",
+                event_label: "Formulario Landing Page",
+                product: dados.produto
+            });
+        }
+
+        // Rastreamento Meta Pixel
+        if (typeof fbq === "function") {
+            fbq("track", "Contact");
+        }
+
+        // Abre o WhatsApp
+        window.open(link, "_blank", "noopener,noreferrer");
+
+    });
+
+}

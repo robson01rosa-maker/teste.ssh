@@ -338,3 +338,139 @@ footer {
     background: #fff;
     border-left: 3px solid var(--azul);
 }
+
+
+/* =================================
+   FORMULÁRIO PRÓPRIO BALAZI
+================================= */
+
+.orcamento-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 55px 24px;
+}
+
+.orcamento-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.orcamento-intro h2 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.orcamento-intro p {
+    color: #666;
+    line-height: 1.6;
+}
+
+#formOrcamento {
+    display: grid;
+    gap: 18px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px;
+    border: 1px solid #e6e9ef;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #333;
+}
+
+.campo textarea {
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    outline: 2px solid rgba(27,83,255,0.2);
+    border-color: #1b53ff;
+}
+
+.consentimento {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.consentimento input {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.btn-enviar {
+    width: 100%;
+    min-height: 54px;
+    padding: 15px;
+    background: #1bb015;
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-enviar:hover {
+    background: #15910f;
+}
+
+.btn-enviar:focus-visible {
+    outline: 3px solid #1b53ff;
+    outline-offset: 3px;
+}
+
+.privacidade {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
+
+@media (max-width: 600px) {
+    .orcamento-section {
+        padding: 35px 16px;
+    }
+
+    .orcamento-intro h2 {
+        font-size: 24px;
+    }
+
+    .campo input,
+    .campo select,
+    .campo textarea {
+        font-size: 16px;
+    }
+
+    .btn-enviar {
+        font-size: 16px;
+    }
+}
